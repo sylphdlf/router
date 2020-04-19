@@ -21,7 +21,6 @@ public class UrlRedirectFilter extends ZuulFilter {
             HttpServletRequest request = context.getRequest();
             System.out.println(request.getRequestURI());
             String contentType = request.getHeader("Content-Type");
-            //feign client无法传递header?
             if(contentType.contains("application/json")){
 //                ServletInputStream inputStream = request.getInputStream();
 //                String copyToString = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
