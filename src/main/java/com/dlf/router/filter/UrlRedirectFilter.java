@@ -21,7 +21,7 @@ public class UrlRedirectFilter extends ZuulFilter {
             HttpServletRequest request = context.getRequest();
             System.out.println(request.getRequestURI());
             String contentType = request.getHeader("Content-Type");
-            if(contentType.contains("application/json")){
+//            if(contentType.contains("application/json")){
 //                ServletInputStream inputStream = request.getInputStream();
 //                String copyToString = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
 //                if(!StringUtils.isEmpty(copyToString)) {
@@ -29,10 +29,10 @@ public class UrlRedirectFilter extends ZuulFilter {
 //                    logger.info("userId:" + jsonObject.get("userId"));
 //                    context.put(FilterConstants.REQUEST_URI_KEY, jsonObject.get("action"));
 //                }
-                context.put(FilterConstants.REQUEST_URI_KEY, "");
-            }else if(contentType.contains("multipart/form-data")){
-                context.put(FilterConstants.REQUEST_URI_KEY, "/file/uploadFile");
-            }
+            context.put(FilterConstants.REQUEST_URI_KEY, "service/wxsp/register");
+//            }else if(contentType.contains("multipart/form-data")){
+//                context.put(FilterConstants.REQUEST_URI_KEY, "/file/uploadFile");
+//            }
         }catch (Exception e){
             e.printStackTrace();
         }
