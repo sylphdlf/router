@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,23 +19,13 @@ public class UrlRedirectFilter extends ZuulFilter {
     public Object run() {
         try {
             RequestContext context = RequestContext.getCurrentContext();
-            HttpServletRequest request = context.getRequest();
-            System.out.println(request.getRequestURI());
-            String contentType = request.getHeader("Content-Type");
-//            if(contentType.contains("application/json")){
-//                ServletInputStream inputStream = request.getInputStream();
-//                String copyToString = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
-//                if(!StringUtils.isEmpty(copyToString)) {
-//                    JSONObject jsonObject = JSONObject.parseObject(copyToString);
-//                    logger.info("userId:" + jsonObject.get("userId"));
-//                    context.put(FilterConstants.REQUEST_URI_KEY, jsonObject.get("action"));
-//                }
-            context.put(FilterConstants.REQUEST_URI_KEY, "service/wxsp/register");
+            String uri  = (String)context.get(FilterConstants.REQUEST_URI_KEY);
+            context.put(FilterConstants.REQUEST_URI_KEY, uri);
 //            }else if(contentType.contains("multipart/form-data")){
 //                context.put(FilterConstants.REQUEST_URI_KEY, "/file/uploadFile");
 //            }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return null;
     }
