@@ -14,6 +14,9 @@ zuul:
     service:
       path: /service/**
       serviceId: service
+logging:
+  level:
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
 
 
 
